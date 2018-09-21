@@ -21,7 +21,7 @@ Check out the [Wiki](https://github.com/gamingninja10/discord-json/wiki)
 
 ### How can I report a bug or suggest a feature?
 
-Create a new [issue](https://github.com/gamingninja10/discord-json/issues) and label it with either bug or suggestion.
+Create a new [issue](https://github.com/gamingninja10/discord-json/issues) and label it with either 'bug' or 'enhancement'.
 
 ### Your code is bad.
 
