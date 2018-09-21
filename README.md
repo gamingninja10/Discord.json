@@ -1,5 +1,5 @@
 ## Discord.json
-###### The easiest way to make a discord bot.
+##### The easiest way to make a discord bot.
 
 ---
 
