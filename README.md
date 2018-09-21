@@ -3,6 +3,11 @@
 
 ---
 
+# WARNING
+
+#### This project is very experimental and isn't recommended for use yet!
+
+
 ### What is Discord.json?
 
 Discord.json is a Discord bot that loads commands and data from json files lowering the barrier of entry for making simple Discord bots.
@@ -13,7 +18,7 @@ If you're already a developer you probably shouldn't, however, If you don't know
 
 ### Why does this exist?
 
-While I wish I could tell you a story amazing story about why I decided to do this, the real reason is, I was just wanted to make something and didn't have much else to do in my free time ¯\_(ツ)_/¯
+While I wish I could tell you a story amazing story about why I decided to do this, the real reason is, I was just wanted to make something and didn't have much else to do in my free time ¯\\_(ツ)\_/¯
 
 ### How do I use it?
 
