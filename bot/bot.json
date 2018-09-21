@@ -1,41 +1,15 @@
 {
-	"token": "NDkxOTczMjk1NzE4MDA2Nzg1.DoPpXw.Sk5YWRY2ZqANuVAQMZXpzi51Kf0",
-	"playing": "words",
+	"token": "[bot token]",
+	"playing": "something",
 	"prefix": "!",
     "commands": [
         {
-            "name": "guild",
+            "name": "ping",
             "args": 0,
             "actions":
             [
-                { "action": "Reply", "args": [ "|guild|" ]} 
+                { "action": "Reply", "args": [ "pong" ] }
             ]
-        },
-        {
-            "name": "addcolor",
-            "args": 1,
-            "actions":
-            [
-                { "action": "AddRole", "args": [ "|user|",  "|0|" ]}
-            ]
-        },
-        {
-            "name": "make-channel",
-            "args": 1,
-            "actions":
-            [
-                { "action": "CreateChannel", "args": [ "|0|" ] }
-            ]
-        },
-        {
-            "name": "purge",
-            "args": 1,
-            "actions":
-            [
-                { "action": "Purge", "args": [ "|0|" ] },
-                { "action": "Reply", "args": [ "*Purged the chat.*" ]}
-            ]
-
         }
     ],
     "events":

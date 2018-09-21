@@ -5897,9 +5897,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\EzBot.Json.csproj",
-      "projectName": "EzBot.Json",
-      "projectPath": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\EzBot.Json.csproj",
+      "projectUniqueName": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\Discord.json.csproj",
+      "projectName": "Discord.json",
+      "projectPath": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\Discord.json.csproj",
       "packagesPath": "C:\\Users\\TGN-PC\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\obj\\",
       "projectStyle": "PackageReference",

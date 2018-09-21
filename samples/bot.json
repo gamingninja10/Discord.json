@@ -1,0 +1,51 @@
+{
+	"token": "[bot token]",
+	"playing": "a game",
+	"prefix": "!",
+    "commands": [
+        {
+            "name": "ping",
+            "args": 0,
+            "actions":
+            [
+                { "action": "Reply", "args": [ "pong" ] }
+            ]
+        },
+        {
+            "name": "echo",
+            "args": 1,
+            "actions":
+            [
+                { "action": "Reply", "args": [ "|0|" ] }
+            ]
+        },
+        {
+            "name": "purge",
+            "args": 1,
+            "actions":
+            [
+                { "action": "Purge", "args": [ "|0|" ] },
+                { "action": "Reply", "args": [ "Purged messages!" ] }
+            ]
+        },
+        {
+            "name": "info",
+            "args": 0,
+            "actions":
+            [
+                { "action": "Reply", "args": [ "|guild|" ] },
+                { "action": "Reply", "args": [ "|user|" ] }
+            ]
+        }
+    ],
+    "events":
+    [
+        {
+            "event": "UserJoined",
+            "actions":
+            [
+                { "action": "Reply", "args": [ "Hello |user| welcome to |guild|" ]}    
+            ]
+        }
+    ]
+}
