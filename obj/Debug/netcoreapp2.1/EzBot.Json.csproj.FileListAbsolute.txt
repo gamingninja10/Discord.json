@@ -1,0 +1,13 @@
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\EzBot.Json.deps.json
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\EzBot.Json.runtimeconfig.json
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\EzBot.Json.runtimeconfig.dev.json
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\EzBot.Json.dll
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\EzBot.Json.pdb
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\EzBot.Json.csprojAssemblyReference.cache
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\EzBot.Json.csproj.CoreCompileInputs.cache
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\EzBot.Json.AssemblyInfoInputs.cache
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\EzBot.Json.AssemblyInfo.cs
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\EzBot.Json.dll
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\EzBot.Json.pdb
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\bot\bot.json
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\bin\Debug\netcoreapp2.1\bot\properties.json
