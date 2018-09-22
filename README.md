@@ -1,8 +1,3 @@
-## Discord.json
-##### The easiest way to make a discord bot.
-
----
-
 # WARNING
 
 #### This project is very experimental and isn't recommended for use yet!
