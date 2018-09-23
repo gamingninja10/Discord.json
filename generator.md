@@ -2,8 +2,7 @@
 title: Discord.json Bot Generator
 ---
 
-## Words
-
+<html>
 <body>
         <H1>Discord.json Bot Creator</H1>
         <label>Bot Token:</label>
@@ -33,3 +32,4 @@ title: Discord.json Bot Generator
             document.body.appendChild(editor);
         }
     </script>
+        </html>
