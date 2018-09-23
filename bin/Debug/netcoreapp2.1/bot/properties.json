@@ -1,0 +1,4 @@
+{
+  "user": "Context.User.Username",
+  "guild": "Context.Guild.Name"
+}

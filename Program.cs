@@ -15,7 +15,7 @@ namespace EzBot.Json
 			{
 				IsPlaying = true,
 				Playing = botData.Playing,
-				Prefix = botData.Prefix 
+				Prefix = botData.Prefix
 			};
 			bot.Start();
         }

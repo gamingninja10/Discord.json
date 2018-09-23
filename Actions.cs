@@ -11,13 +11,16 @@ namespace EzBot.Json
 {
 	public class Actions
 	{
+		// Holds information about the guild, message, user, bot etc
 		public static SocketCommandContext Context { get; set; }
-		public Dictionary<string, JMethodData> Commands { get; set; }
+
+		// This is a list of all vaild jactions
+		public Dictionary<string, JMethodData> JActions { get; set; }
 
 		[JAction("Reply")]
 		public async Task SendMessage(string text) => await ReplyAsync(text);
 
-		[JAction("Purge")]
+		[JAction("Purge"), RequireBotPermission(GuildPermission.ManageMessages)]
 		public async Task PurgeAsync(string amountString)
 		{
 			if (Int32.TryParse(amountString, out int amount))
@@ -36,19 +39,19 @@ namespace EzBot.Json
 			await user.AddRoleAsync(role);
 		}
 
-		[JAction("CreateRole")]
+		[JAction("CreateRole"), RequireBotPermission(GuildPermission.ManageRoles)]
 		public async Task CreateRoleAsync(string name) => await Context.Guild.CreateRoleAsync(name);
 
-		[JAction("DeleteRole")]
+		[JAction("DeleteRole"), RequireBotPermission(GuildPermission.ManageRoles)]
 		public async Task DeleteRoleAsync(string name) => await Context.Guild.Roles.ToList().Find(r => r.Name == name).DeleteAsync();
 
-		[JAction("CreateChannel")]
+		[JAction("CreateChannel"), RequireBotPermission(GuildPermission.ManageChannels)]
 		public async Task CreateChannel(string name)
 		{
 			await Context.Guild.CreateTextChannelAsync(name);
 		}
 
-		[JAction("DeleteChannel")]
+		[JAction("DeleteChannel"), RequireBotPermission(GuildPermission.ManageChannels)]
 		public async Task DeleteChannel(string name)
 		{
 			var channel = Context.Guild.Channels.ToList().Find(c => c.Name == name);
@@ -63,7 +66,7 @@ namespace EzBot.Json
 			await user.ModifyAsync(n => n.Nickname = name);
 		}
 
-		[JAction("MoveToCategory")]
+		[JAction("MoveToCategory"), RequireBotPermission(GuildPermission.ManageChannels)]
 		public async Task MoveChannel(string channelName, string categoryName)
 		{
 			try
@@ -87,10 +90,10 @@ namespace EzBot.Json
 			{
 				var localArgs = ArgParser(action.Arguments, cmdData);
 
-				var commandMethod = Commands[action.Name];
+				var commandMethod = JActions[action.Name];
 				try
 				{
-					//Checks if the parameters are the correct legnth
+					// Checks if the parameters are the correct legnth to avoid crashes
 					if (localArgs.Count > commandMethod.Parameters.Count)
 					{
 						var amount = localArgs.Count - commandMethod.Parameters.Count;
@@ -116,22 +119,38 @@ namespace EzBot.Json
 
 			foreach (string _arg in actionArgs)
 			{
-				// Binds the command arguments - Exmaple: !kick CoolGuy365 "This is a reason", action: kick, args: |0| -> 'CoolGuy365', |1| -> 'This is a reason'
-				var regex = new Regex(@"^\|(.*?)\|$");
+				// Binds the command arguments
+				// Exmaple: !kick CoolGuy365 "This is a reason", action: kick, args: |0| -> 'CoolGuy365', | | -> 'This is a reason'
+				// Example: !guildinfo, action: reply, args: "Name: |guild| \n Members: |guild.members|"
+				var regex = new Regex(@"\|(.*?)\|"); // This pattern matches everything between ||
 				var matches = regex.Matches(_arg);
 
+				// Checks if there is any matches
+				// If there is go through each one and replace it with the correct information
+				// If it's a number, it replaces it with that position in the command parameters. 
+				// Example: Command: !echo hi, Action: Reply "Echo: |0|", Returns "Echo: hi"
+				// If it's a string it replaces it with the proper property so, "Welcome to '|guild|'" -> "Welcome to 'MyCoolGuild'"
 				if (matches.Count > 0)
 				{
-					var arg = matches[0].Groups[1].Value;
-					Console.WriteLine(arg);
-
-					if (Int32.TryParse(arg, out int index))
-						returnArgs.Add(userArgs.Arguments[index]);
-					else
+					string returnArg = _arg;
+					foreach (Match match in matches)
 					{
-						var bindArg = ReflectionHelper.GetPropValue<string>(this, JPropertyBinds.Binds[arg]);
-						returnArgs.Add(bindArg);
+						var arg = match.Groups[1].Value;
+						
+						if (Int32.TryParse(arg, out int index))
+						{
+							var posArg = userArgs.Arguments[index];
+							returnArg = returnArg.Replace(match.Value, posArg.ToString());
+							Console.WriteLine(_arg);
+						}
+						else
+						{
+							var bindArg = ReflectionHelper.GetPropValue<string>(this, JPropertyBinds.Binds[arg]);
+							returnArg = returnArg.Replace(match.Value, bindArg);
+						}
 					}
+					returnArgs.Add(returnArg);
+
 				}
 				else
 					returnArgs.Add(_arg);

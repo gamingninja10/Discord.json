@@ -10,11 +10,5 @@ namespace EzBot.Json
 
 		[JsonProperty("args")]
 		public List<string> Arguments { get; set; }
-
-		public JsonAction(string action, List<string> args)
-		{
-			this.Name = action;
-			this.Arguments = args;
-		}
     }
 }

@@ -10,10 +10,5 @@ namespace EzBot.Json
 		
 		[JsonProperty("actions")]
 		public List<JsonAction> Actions { get; private set; }
-
-		public JsonEvent(string name, List<JsonAction> actions)
-		{
-
-		}
     }
 }

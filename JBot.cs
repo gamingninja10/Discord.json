@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -120,13 +119,13 @@ namespace EzBot.Json
 		{
 			JPropertyBinds.Load(_binds);
 
-			_actions.Commands = new Dictionary<string, JMethodData>();
+			_actions.JActions = new Dictionary<string, JMethodData>();
 			var Commands = ReflectionHelper.GetMethodsWithAttribute(typeof(Actions), typeof(JActionAttribute));
 
 			foreach (var command in Commands)
 			{
 				var jcmd = (JActionAttribute)command.GetCustomAttribute(typeof(JActionAttribute));
-				_actions.Commands.Add(jcmd.Name, new JMethodData(command.Name, command.GetParameters().ToList()));
+				_actions.JActions.Add(jcmd.Name, new JMethodData(command.Name, command.GetParameters().ToList()));
 			}
 		}
 
@@ -146,25 +145,21 @@ namespace EzBot.Json
 			if (message.HasStringPrefix(Prefix, ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos) && AllowMentionPrefix)
 			{
 				var context = new SocketCommandContext(Client, message);
-				var commandArgs = ParseMessage(message.Content, argPos);
+				var commandArgs = ParseMessage(message.Content);
 				await _actions.ExecuteAsync(context, GetCommand(commandArgs.Command), commandArgs);
-				//var result = await _commands.ExecuteAsync(context, argPos, _services);
-
-				//if (!result.IsSuccess)
-					//Console.WriteLine(result.ErrorReason);
 			}
 		}
 
-		public CommandArgs ParseMessage(string content, int offset)
+		public CommandArgs ParseMessage(string content)
 		{
-			var regex = new Regex(@"[\""].+?[\""]|[^ ]+|^");
+			var regex = new Regex(@"[\""].+?[\""]|[^ ]+|^"); // This pattern separates everything via spaces, unless it's in single or double quotes.
 			var matches = regex.Matches(content).ToList();
 
-			var command = matches[0].Value.Replace(Prefix, "");
+			var command = matches[0].Value.Replace(Prefix, ""); // Removes the prefix from the command
 			var parameters = new List<object>();
 
 			for (int i = 1; i < matches.Count; i++)
-				parameters.Add(matches[i].Value.Replace("\"", ""));
+				parameters.Add(matches[i].Value.Replace("\"", "")); // Removes the quotes from the strings
 
 			return new CommandArgs(command, parameters);
 		}
