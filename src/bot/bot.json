@@ -1,0 +1,26 @@
+{
+    "token": "[bot token]",
+    "prefix": "!",
+    "playing": "Existing",
+    "activity": 1,
+    "commands": [
+        {
+            "name": "echo",
+            "args": 1,
+            "actions":
+            [
+                { "action": "Reply", "args": [ "Echo: |0|" ] }
+            ]
+        }
+    ],
+    "events":
+    [
+        {
+            "event": "UserJoined",
+            "actions":
+            [
+                { "action": "Reply", "args": [ "Hello |user| welcome to |guild|" ]}    
+            ]
+        }
+    ]
+}
