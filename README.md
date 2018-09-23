@@ -1,16 +1,11 @@
-## Discord.json
-##### The easiest way to make a discord bot.
-
----
-
 # WARNING
 
-#### This project is very experimental and isn't recommended for use yet!
+This project is very experimental and isn't recommended for use yet!
 
 
 ### What is Discord.json?
 
-Discord.json is a Discord bot that loads commands and data from json files lowering the barrier of entry for making simple Discord bots.
+**Discord.json is a Discord bot that loads commands and data from json files lowering the barrier of entry for making simple Discord bots.**
 
 ### Why should I use this?
 
@@ -22,14 +17,14 @@ While I wish I could tell you a story amazing story about why I decided to do th
 
 ### How do I use it?
 
-Check out the [Wiki](https://github.com/gamingninja10/discord-json/wiki)
+Check out the [Wiki](https://github.com/thegamingninja/Discord.json/wiki) to learn how to use Discord.json
 
 ### How can I report a bug or suggest a feature?
 
-Create a new [issue](https://github.com/gamingninja10/discord-json/issues) and select either 'Bug report' or 'Feature Request'
+Create a new [issue](https://github.com/thegamingninja/Discord.json/issues) and select either 'Bug report' or 'Feature Request'
 
 ### Your code is bad.
 
 Yeah yeah, I know, I chose this project over others because I wanted to learn how to do stuff like this, If you want to make a pull request or fork the project feel free!
 
-###### *V 0.0.1* (EXTEREMLY VERY Early Alpha)
+###### *V 0.1* (EXTEREMLY VERY Early Alpha)
