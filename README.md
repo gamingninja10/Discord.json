@@ -1,7 +1,3 @@
----
-title: Discord.json
----
-
 # WARNING
 
 This project is very experimental and isn't recommended for use yet!
