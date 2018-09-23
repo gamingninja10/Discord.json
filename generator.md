@@ -23,7 +23,6 @@ title: Discord.json Bot Generator
         <button onclick="addCommand()">+</button>
         <br>
     </body>
-
     <script src="creator.js"></script>
     <script>
         var commands = new Array();
