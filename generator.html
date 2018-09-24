@@ -1,12 +1,19 @@
-
 <html>
-<body>
-        <H1>Discord.json Bot Creator</H1>
-        <label>Bot Token:</label>
-        <input id="token" placeholder="token" />
+    <title>Discord.json Generator</title>
+
+    <body>
+        <h1>Discord.json Bot Creator</h1>
         <br>
-        <label>Playing</label>
-        <input id="playing" placeholder="a game" />
+        <br>
+        <h3>Bot Settings:</h3>
+        <label>Bot Token:</label>
+        <input id="token" />
+        <br>
+        <label>Prefix:</label>
+        <input id="prefix" />
+        <br>
+        <label>Playing:</label>
+        <input id="playing" />
         <br>
         <label>Activity</label>
         <select id="activity">
@@ -16,17 +23,96 @@
             <option value=4>Listening</option>
         </select>
         <br>
+        <h3>Commands</h3>
+        <label>Add Command</label>
         <button onclick="addCommand()">+</button>
-        <br>
+        <div id="commandArea" class="cmdarea">
+            <br>
+        </div>
+        <button onclick="SaveData()">Save</button>
     </body>
+
     <script src="creator.js"></script>
+    <script src="data_classes.js"></script>
     <script>
-        var commands = new Array();
+        var editorArea = document.getElementById("commandArea");
+        var commandGen = new Array();
         function addCommand()
         {
             var editor = commandEditor();
-            commands.push(editor);
-            document.body.appendChild(editor);
+            commandGen.push(editor);
+            editorArea.appendChild(editor);
         }
+
+        function SaveData()
+        {
+            var commands = Array();
+            for (var c = 0; c < commandGen.length; c++)
+            {
+                var container = document.getElementById(commandGen[c].id);
+                var actionsInput = container.getElementsByClassName("actionInput");
+
+                var actions = new Array();
+                var commandInput = container.getElementsByClassName("commandInput")[0].value;
+
+                for (var a = 0; a < actionsInput.length; a++ )
+                {
+                    var argsInput = actionsInput[a].parentElement.getElementsByClassName("argInput")
+
+                    var args = new Array();
+                    for (var ar = 0; ar < argsInput.length; ar++)
+                    {
+                        args.push(argsInput[ar].value);
+                    }
+
+                    var action = new Action(actionsInput[a].value, args);
+                    actions.push(action);
+                }
+                
+                var argCount = container.getElementsByClassName("argCountInput")[0].value;
+                var command = new Command(commandInput, argCount, actions);
+                commands.push(command);
+            }
+            var token = document.getElementById("token").value;
+            var prefix = document.getElementById("prefix").value;
+            var playing = document.getElementById("playing").value;
+            var activity = new Number(document.getElementById("activity").value);
+            var botData = {
+                token,
+                prefix,
+                playing,
+                activity,
+                commands
+            }
+            var json = JSON.stringify(botData);
+            console.log(json);
+            download("bot.json", json);
+        }
+        
     </script>
+
+    <style>
+        .spacer {
+            margin-top: 10px;
+        }
+        .spacer-max {
+            margin-bottom: 20px;
+            margin-top: 10px;
+            border-style: solid;
+            border-color: gray;
+            padding-bottom: 5px; 
+        }
+        .spacer-right {
+            margin-right: 5px;
+        }
+        .move-right {
+            margin-left: 30px;
+        }
+        body  {
+            font-family: sans-serif;
+        }
+        .cmdarea {
+            width: 100%;
+        }
+    </style>
 </html>
