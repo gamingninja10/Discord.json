@@ -15,14 +15,14 @@
     a:hover {
       text-decoration: underline; }
     input { 
-        height: 50px;
+        height: 35px;
         width: 250px;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 16px;
     }
 
     select { 
-        height: 50px;
+        height: 35px;
         width: 250px;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 16px;
@@ -31,6 +31,7 @@
     .spacer-right {
         margin-right: 15px;
     }
+
   button {
     display: inline-block;
     margin-bottom: 1rem;
