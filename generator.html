@@ -1,21 +1,25 @@
 <html>
     <title>Discord.json Generator</title>
-
-    <body>
-        <h1>Discord.json Bot Creator</h1>
+    <link rel="stylesheet" type="text/css" href="generator.css">
+    <body class="page-header">
+        <h1 class="project-name">Discord.json Bot Creator</h1>
         <br>
         <br>
-        <h3>Bot Settings:</h3>
-        <label>Bot Token:</label>
-        <input id="token" />
+        <h2>Bot Settings:</h2>
+        <label class="main-content">Bot Token:</label>
         <br>
-        <label>Prefix:</label>
-        <input id="prefix" />
+        <input id="token"/>
         <br>
-        <label>Playing:</label>
-        <input id="playing" />
+        <label class="main-content">Prefix:</label>
         <br>
-        <label>Activity</label>
+        <input id="prefix"/>
+        <br>
+        <label class="main-content">Playing:</label>
+        <br>
+        <input id="playing"/>
+        <br>
+        <label class="main-content">Activity</label>
+        <br>
         <select id="activity">
             <option value=0>Playing</option>
             <option value=1>Streaming</option>
@@ -24,12 +28,12 @@
         </select>
         <br>
         <h3>Commands</h3>
-        <label>Add Command</label>
-        <button onclick="addCommand()">+</button>
+        <label class="main-content">Add Command</label>
+        <button onclick="addCommand()" class="btn">+</button>
         <div id="commandArea" class="cmdarea">
             <br>
         </div>
-        <button onclick="SaveData()">Save</button>
+        <button onclick="SaveData()" class="btn">Save</button>
     </body>
 
     <script src="creator.js"></script>
@@ -91,28 +95,5 @@
         
     </script>
 
-    <style>
-        .spacer {
-            margin-top: 10px;
-        }
-        .spacer-max {
-            margin-bottom: 20px;
-            margin-top: 10px;
-            border-style: solid;
-            border-color: gray;
-            padding-bottom: 5px; 
-        }
-        .spacer-right {
-            margin-right: 5px;
-        }
-        .move-right {
-            margin-left: 30px;
-        }
-        body  {
-            font-family: sans-serif;
-        }
-        .cmdarea {
-            width: 100%;
-        }
-    </style>
+   
 </html>
