@@ -117,7 +117,7 @@ namespace Discord.json
 			foreach (var command in Commands)
 			{
 				var jcmd = (JActionAttribute)command.GetCustomAttribute(typeof(JActionAttribute));
-				_actions.JActions.Add(jcmd.Name, new JMethodData(command.Name, command.GetParameters().ToList()));
+				_actions.JActions.Add(jcmd.Name.ToLower(), new JMethodData(command.Name, command.GetParameters().ToList()));
 			}
 		}
 

@@ -11,8 +11,6 @@ C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\Discord.json.AssemblyInfo.cs
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\Discord.json.dll
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\obj\Debug\netcoreapp2.1\Discord.json.pdb
-C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\bot\properties.json
-C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\bot\bot.json
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\Discord.json.deps.json
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\Discord.json.runtimeconfig.json
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\Discord.json.runtimeconfig.dev.json
@@ -24,3 +22,5 @@ C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\obj\D
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\obj\Debug\netcoreapp2.1\Discord.json.AssemblyInfo.cs
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\obj\Debug\netcoreapp2.1\Discord.json.dll
 C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\obj\Debug\netcoreapp2.1\Discord.json.pdb
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\bot\properties.binds
+C:\Users\TGN-PC\Documents\Visual Studio 2017\Projects\EzBot\EzBot.Json\src\bin\Debug\netcoreapp2.1\bot\main.bot

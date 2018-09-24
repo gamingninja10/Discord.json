@@ -89,7 +89,7 @@ namespace Discord.json
 			{
 				var localArgs = ArgParser(action.Arguments, cmdData);
 
-				var commandMethod = JActions[action.Name];
+				var commandMethod = JActions[action.Name.ToLower()];
 				try
 				{
 					// Checks if the parameters are the correct legnth to avoid crashes

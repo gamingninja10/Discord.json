@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 
 namespace Discord.json
 {
@@ -7,8 +8,10 @@ namespace Discord.json
     {
         static void Main(string[] args)
         {
-			var json = File.ReadAllText($@"{Directory.GetCurrentDirectory()}\bot\bot.json");
-			var binds = File.ReadAllText($@"{Directory.GetCurrentDirectory()}\bot\properties.json");
+			var files = Directory.GetFiles($@"{Directory.GetCurrentDirectory()}\bot").ToList();
+			var json = File.ReadAllText(files.Where(f => f.Contains(Path.GetExtension(".bot"))).FirstOrDefault());
+			var binds = File.ReadAllText(files.Where(f => f.Contains(Path.GetExtension(".binds"))).FirstOrDefault());
+
 			var botData = JsonConvert.DeserializeObject<JsonBotData>(json);
 
 			var bot = new JBot(botData.Token, botData, binds)
