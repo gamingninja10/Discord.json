@@ -1,28 +1,21 @@
 <html>
     <title>Discord.json Generator</title>
-    <link rel="stylesheet" type="text/css" href="generator.css">
-    <body class="page-header">
-        <h1 class="project-name">Discord.json Bot Creator</h1>
+
+    <body>
+        <h1>Discord.json Bot Creator</h1>
         <br>
         <br>
-        <h2>Bot Settings</h2>
-        <label class="main-content">Bot Token:</label>
+        <h3>Bot Settings:</h3>
+        <label>Bot Token:</label>
+        <input id="token" />
         <br>
-        <input id="token"/>
+        <label>Prefix:</label>
+        <input id="prefix" />
         <br>
+        <label>Playing:</label>
+        <input id="playing" />
         <br>
-        <label class="main-content">Prefix:</label>
-        <br>
-        <input id="prefix"/>
-        <br>
-        <br>
-        <label class="main-content">Playing:</label>
-        <br>
-        <input id="playing"/>
-        <br>
-        <br>
-        <label class="main-content">Activity</label>
-        <br>
+        <label>Activity</label>
         <select id="activity">
             <option value=0>Playing</option>
             <option value=1>Streaming</option>
@@ -30,13 +23,13 @@
             <option value=4>Listening</option>
         </select>
         <br>
-        <br>
-        <h2>Commands</h2>
-        <button onclick="addCommand()" class="btn">Add Command</button>
+        <h3>Commands</h3>
+        <label>Add Command</label>
+        <button onclick="addCommand()">+</button>
         <div id="commandArea" class="cmdarea">
             <br>
         </div>
-        <button onclick="SaveData()" class="btn">Download</button>
+        <button onclick="SaveData()">Save</button>
     </body>
 
     <script src="creator.js"></script>
@@ -93,10 +86,33 @@
             }
             var json = JSON.stringify(botData);
             console.log(json);
-            download("bot.json", json);
+            download("main.bot", json);
         }
         
     </script>
 
-   
+    <style>
+        .spacer {
+            margin-top: 10px;
+        }
+        .spacer-max {
+            margin-bottom: 20px;
+            margin-top: 10px;
+            border-style: solid;
+            border-color: gray;
+            padding-bottom: 5px; 
+        }
+        .spacer-right {
+            margin-right: 5px;
+        }
+        .move-right {
+            margin-left: 30px;
+        }
+        body  {
+            font-family: sans-serif;
+        }
+        .cmdarea {
+            width: 100%;
+        }
+    </style>
 </html>

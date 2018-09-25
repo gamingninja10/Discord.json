@@ -17,7 +17,7 @@ function commandEditor()
     input.size = 8;
 
     var argAmount = document.createElement("input");
-    argAmount.classList.add("spacer-right");
+    argAmount.classList.add("right-spacer");
     argAmount.type = "number";
     argAmount.min = 0;
     argAmount.max = 9;
@@ -25,7 +25,6 @@ function commandEditor()
     argAmount.className = "argCountInput"
 
     var addAction = document.createElement("button");
-    argAmount.classList.add("spacer-right");
     addAction.textContent = "+";
     addAction.setAttribute("onClick", "actionEditor(\""+id+"\")");
 
