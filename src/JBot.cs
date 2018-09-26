@@ -99,7 +99,26 @@ namespace Discord.json
 			RegisterCommands();
 
 			// Log in as bot
-			await Client.LoginAsync(TokenType, _token);
+			try
+			{
+				await Client.LoginAsync(TokenType, _token);
+			}
+			catch (Exception e)
+			{
+				string result = e.Message;
+
+				if (result.Contains("401"))
+				{
+					Console.WriteLine("Invaild Token");
+					
+				}
+				if (result == "No such host is known")
+				{
+					Console.WriteLine("Unable to connect to Discord");
+				}
+				await Task.Delay(10000);
+				return;
+			}
 			await Client.StartAsync();
 
 			// Stop console from closing
@@ -132,7 +151,7 @@ namespace Discord.json
 		private async Task HandleCommandAsync(SocketMessage arg)
 		{
 			if (!(arg is SocketUserMessage message) || message.Author.IsBot) return;
-
+			Console.WriteLine(message.Content);
 			int argPos = 0;
 			if (message.HasStringPrefix(Prefix, ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos) && AllowMentionPrefix)
 			{

@@ -1,17 +1,28 @@
 {
-  "token": "[bot token]",
+  "token": "NDkxOTczMjk1NzE4MDA2Nzg1.DowXwA.r8gtAgy_7tcPX9JXg4yIT7XLpIY",
   "prefix": "!",
   "playing": "Existing",
   "activity": 1,
   "commands": [
     {
-      "name": "echo",
+      "name": "send",
+      "args": 2,
+      "actions": [
+        { "action": "SendMessage", "args": [ "|0|", "|1|" ]}
+      ]
+    },
+    {
+      "name": "nick",
+      "args": 2,
+      "actions": [
+        { "action": "ChangeNickname", "args": [ "|0|", "|1|" ]}
+      ]
+    },
+    {
+      "name": "delrole",
       "args": 1,
       "actions": [
-        {
-          "action": "Reply",
-          "args": [ "Echo: |0|" ]
-        }
+        { "action": "DeleteRole", "args": [ "|0|" ]}
       ]
     }
   ],
