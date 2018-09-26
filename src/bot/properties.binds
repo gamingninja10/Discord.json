@@ -1,4 +1,5 @@
 {
-  "user": "Context.User.Username",
+  "user-name": "Context.User.Username",
+  "user": "Context.User.Mention",
   "guild": "Context.Guild.Name"
 }

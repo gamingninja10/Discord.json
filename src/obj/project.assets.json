@@ -5891,23 +5891,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dotcd\\.nuget\\packages\\": {},
+    "C:\\Users\\TGN-PC\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dotcd\\Desktop\\Desktop\\Git\\Discord.json\\src\\Discord.json.csproj",
+      "projectUniqueName": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\src\\Discord.json.csproj",
       "projectName": "Discord.json",
-      "projectPath": "C:\\Users\\dotcd\\Desktop\\Desktop\\Git\\Discord.json\\src\\Discord.json.csproj",
-      "packagesPath": "C:\\Users\\dotcd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dotcd\\Desktop\\Desktop\\Git\\Discord.json\\src\\obj\\",
+      "projectPath": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\src\\Discord.json.csproj",
+      "packagesPath": "C:\\Users\\TGN-PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TGN-PC\\Documents\\Visual Studio 2017\\Projects\\EzBot\\EzBot.Json\\src\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\dotcd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TGN-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

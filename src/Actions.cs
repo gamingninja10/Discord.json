@@ -12,7 +12,7 @@ namespace Discord.json
 	public class Actions
 	{
 		// Holds information about the guild, message, user, bot etc
-		public static SocketCommandContext Context { get; set; }
+		public static ICommandContext Context { get; set; }
 
 		// This is a list of all vaild jactions
 		public Dictionary<string, JMethodData> JActions { get; set; }
@@ -76,7 +76,7 @@ namespace Discord.json
 		{
 			try
 			{
-				var category = Context.Guild.CategoryChannels.ToList().Find(c => c.Name == categoryName);
+				var category = (Context.Guild as SocketGuild).CategoryChannels.ToList().Find(c => c.Name == categoryName);
 
 				await channel.ModifyAsync(x => x.CategoryId = category.Id);
 			}
@@ -91,10 +91,10 @@ namespace Discord.json
         {
             try
             {
-                await Context.Guild.ModifyAsync(async x =>
-                {
-                    x.Name = newName;
-                });
+                await Context.Guild.ModifyAsync(x =>
+				{
+					x.Name = newName;
+				});
 
             }
             catch (Exception e)
@@ -109,33 +109,37 @@ namespace Discord.json
 
 			foreach (var action in command.Actions)
 			{
-				var localArgs = ArgParser(action.Arguments, cmdData);
-
-				var commandMethod = JActions[action.Name.ToLower()];
-				try
-				{
-					// Checks if the parameters are the correct legnth to avoid crashes
-					if (localArgs.Count > commandMethod.Parameters.Count)
-					{
-						// Gets the amount of extra paramerts then removes those from the end of the list
-						var amount = localArgs.Count - commandMethod.Parameters.Count;
-						localArgs.RemoveRange(commandMethod.Parameters.Count, amount);
-					}
-					else if (localArgs.Count < commandMethod.Parameters.Count)
-					{
-						await ReplyAsync("Not Enough Parameters");
-					}
-
-					await ReflectionHelper.InvokeMethod<Actions>(new Actions(), commandMethod.Name, localArgs.ToArray());
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine(e);
-				}
+				var args = ArgParser(action.Arguments, cmdData.Arguments);
+				await ExecuteActionAsync(action, args);
 			}
 		}
 
-		private List<object> ArgParser(List<string> actionArgs, CommandArgs userArgs)
+		public async Task ExecuteActionAsync(JsonAction action, List<object> localArgs)
+		{
+			var commandMethod = JActions[action.Name.ToLower()];
+			try
+			{
+				// Checks if the parameters are the correct legnth to avoid crashes
+				if (localArgs.Count > commandMethod.Parameters.Count)
+				{
+					// Gets the amount of extra paramerts then removes those from the end of the list
+					var amount = localArgs.Count - commandMethod.Parameters.Count;
+					localArgs.RemoveRange(commandMethod.Parameters.Count, amount);
+				}
+				else if (localArgs.Count < commandMethod.Parameters.Count)
+				{
+					await ReplyAsync("Not Enough Parameters");
+				}
+
+				await ReflectionHelper.InvokeMethod<Actions>(new Actions(), commandMethod.Name, localArgs.ToArray());
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+			}
+		}
+
+		public List<object> ArgParser(List<string> actionArgs, List<object> userArgs)
 		{
 			var returnArgs = new List<object>();
 
@@ -147,7 +151,7 @@ namespace Discord.json
 				var bind = new Regex(@"\|(.*?)\|"); // This pattern matches everything between ||
 				var bindMatches = bind.Matches(_arg);
 
-				var mention = new Regex("^<[#@&]+?([0-9]+?)>$");
+				var mention = new Regex("^<[#@&!]+?([0-9]+?)>$");
 
 				// Checks if there is any matches
 				// If there is go through each one and replace it with the correct information
@@ -163,35 +167,21 @@ namespace Discord.json
 
 						if (Int32.TryParse(arg, out int index))
 						{
-							var posArg = userArgs.Arguments[index];
+							var posArg = userArgs[index];
 							returnArg = (returnArg as string).Replace(match.Value, posArg.ToString());
 
 							var mentionMatch = mention.Match((string)returnArg);
-
 							if (mentionMatch.Success)
-							{
-								var mUlong = mentionMatch.Groups[1].Value;
-								var mMatch = mentionMatch.Value;
-
-								UInt64.TryParse(mUlong, out ulong id);
-								if (mMatch.StartsWith("<@"))
-								{
-									returnArg = Context.Guild.GetUser(id);
-								}
-								else if (mMatch.StartsWith("<#"))
-								{
-									returnArg = Context.Guild.GetTextChannel(id);
-								}
-								/*else if (mMatch.Contains("<@&")) // Allows for @[role] in the args to be used as SocketRole
-								{
-									returnArg = Context.Guild.GetRole(id);
-								}*/
-							}
+								returnArg = ReplaceMentions(mentionMatch);
 						}
 						else
 						{
 							var bindArg = ReflectionHelper.GetPropValue<string>(this, JPropertyBinds.Binds[arg]);
 							returnArg = (returnArg as string).Replace(match.Value, bindArg);
+
+							var mentionMatch = mention.Match((string)returnArg);
+							if (mentionMatch.Success)
+								returnArg = ReplaceMentions(mentionMatch);
 						}
 					}
 					returnArgs.Add(returnArg);
@@ -201,6 +191,28 @@ namespace Discord.json
 					returnArgs.Add(_arg);
 			}
 			return returnArgs;
+		}
+
+		object ReplaceMentions(Match match)
+		{
+			object returnArg = null;
+			var mUlong = match.Groups[1].Value;
+			var mMatch = match.Value;
+
+			UInt64.TryParse(mUlong, out ulong id);
+			if (mMatch.StartsWith("<@"))
+			{
+				returnArg = (Context.Guild as SocketGuild).GetUser(id);
+			}
+			else if (mMatch.StartsWith("<#"))
+			{
+				returnArg = (Context.Guild as SocketGuild).GetTextChannel(id);
+			}
+			/*else if (mMatch.Contains("<@&")) // Allows for @[role] in the args to be used as SocketRole
+			{
+				returnArg = Context.Guild.GetRole(id);
+			}*/
+			return returnArg;
 		}
 	}
 }

@@ -97,6 +97,7 @@ namespace Discord.json
 
 			Client.MessageReceived += HandleCommandAsync;
 			RegisterCommands();
+			RegisterEvents();
 
 			// Log in as bot
 			try
@@ -140,6 +141,39 @@ namespace Discord.json
 			}
 		}
 
+		private void RegisterEvents()
+		{
+			if (_data.Events.Find(e => e.Name == "UserJoined") != null)
+				Client.UserJoined += ExecuteEvent;
+		}
+
+		public async Task ExecuteEvent(object args)
+		{
+			var eventObjects = new Dictionary<Type, string>
+			{
+				{ typeof(SocketGuildUser), "UserJoined" }
+			};
+			await ExecuteActionsAsync(eventObjects[args.GetType()], args);
+		}
+
+		private async Task ExecuteActionsAsync(string eventName, object args)
+		{
+			var eventData = _data.Events.Find(e => e.Name == eventName);
+			switch (eventName)
+			{
+				case "UserJoined":
+					
+					foreach (var action in eventData.Actions)
+					{
+						var user = (args as SocketGuildUser);
+						Actions.Context = new SocketEventContext(Client, user);
+						var argList = _actions.ArgParser(action.Arguments, new List<object>());//new List<object>(action.Arguments);
+						await _actions.ExecuteActionAsync(action, argList);
+					}
+					break;
+			}
+		}
+
 		private Task Log(LogMessage arg)
 		{
 			if (PrintLog)
@@ -151,7 +185,7 @@ namespace Discord.json
 		private async Task HandleCommandAsync(SocketMessage arg)
 		{
 			if (!(arg is SocketUserMessage message) || message.Author.IsBot) return;
-			Console.WriteLine(message.Content);
+
 			int argPos = 0;
 			if (message.HasStringPrefix(Prefix, ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos) && AllowMentionPrefix)
 			{
