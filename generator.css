@@ -32,6 +32,13 @@
         margin-right: 15px;
     }
 
+    .linkFoot {
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      font-style: italic;
+      color: darkslategray;
+    }
+
   button {
     display: inline-block;
     margin-bottom: 1rem;

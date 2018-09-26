@@ -38,6 +38,7 @@ function commandEditor()
 
 function actionEditor(_parentDiv)
 {
+    const possibleActions = ["Reply", "SendMessage", "Purge", "AddRole", "CreateRole", "DeleteRole", "CreateTextChannel", "DeleteTextChannel", "ChangeNickname", "MoveToCategory", "ChangeServerName"];
     var parentDiv = document.getElementById(_parentDiv);
 
     var id = "action-" + Math.random();
@@ -51,11 +52,17 @@ function actionEditor(_parentDiv)
     deleteBtn.textContent = "X";
     deleteBtn.setAttribute("onClick", "remove(\""+id+"\")");
 
-    var input = document.createElement("input")
+    var input = document.createElement("select")
     input.className = "actionInput";
     input.classList.add("spacer-right");
-    input.placeholder = "Action";
-    input.size = 10;
+    for (var i = 0; i < possibleActions.length; i++)
+    {
+        var option = document.createElement("option");
+        option.value = possibleActions[i];
+        option.text = possibleActions[i];
+        input.appendChild(option);
+    }
+    //input.size = 10;
 
     var addArg = document.createElement("button");
     addArg.textContent = "+";
