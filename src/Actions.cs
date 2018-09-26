@@ -86,6 +86,23 @@ namespace Discord.json
 			}
 		}
 
+        [JAction("ChangeServerName"), RequireBotPermission(GuildPermission.ManageGuild)]
+        public async Task ChangeServerName(string newName)
+        {
+            try
+            {
+                await Context.Guild.ModifyAsync(async x =>
+                {
+                    x.Name = newName;
+                });
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
 		public async Task ExecuteAsync(SocketCommandContext context, JsonCommand command, CommandArgs cmdData)
 		{
 			Context = context;
