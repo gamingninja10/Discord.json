@@ -8,7 +8,7 @@ namespace Discord.json.Helpers
 {
 	public class ReflectionHelper
 	{
-		public static object GetPropValue(object obj, String name)
+		public static object GetPropValue(object obj, string name)
 		{
 			foreach (string part in name.Split('.'))
 			{
@@ -23,9 +23,9 @@ namespace Discord.json.Helpers
 			return obj;
 		}
 
-		public static T GetPropValue<T>(object obj, String name)
+		public static T GetPropValue<T>(object obj, string name)
 		{
-			Object retval = GetPropValue(obj, name);
+			object retval = GetPropValue(obj, name);
 			if (retval == null) { return default(T); }
 
 			// throws InvalidCastException if types are incompatible

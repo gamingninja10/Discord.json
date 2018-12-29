@@ -32,7 +32,7 @@ namespace Discord.json
 		[JAction("Purge"), RequireBotPermission(GuildPermission.ManageMessages)]
 		public async Task PurgeAsync(string amountString)
 		{
-			if (Int32.TryParse(amountString, out int amount))
+			if (int.TryParse(amountString, out int amount))
 			{
 				var messages = Context.Channel.GetMessagesAsync((amount + 1)).Flatten().ToEnumerable();
 				await (Context.Channel as SocketTextChannel).DeleteMessagesAsync(messages);
@@ -42,9 +42,17 @@ namespace Discord.json
 		[JAction("AddRole"), RequireBotPermission(GuildPermission.ManageRoles)]
 		public async Task AddRoleAsync(SocketGuildUser user, string roleName)
 		{
-			var role = Context.Guild.Roles.ToList().Find(r => r.Name == roleName);
+			IRole role = Context.Guild.Roles.ToList().Find(r => r.Name == roleName);
 
 			await user.AddRoleAsync(role);
+		}
+
+		[JAction("RemoveRole"), RequireBotPermission(GuildPermission.ManageRoles)]
+		public async Task RemoveRoleAsync(SocketGuildUser user, string roleName)
+		{
+			IRole role = Context.Guild.Roles.ToList().Find(r => r.Name == roleName);
+
+			await user.RemoveRoleAsync(role);
 		}
 
 		[JAction("CreateRole"), RequireBotPermission(GuildPermission.ManageRoles)]
@@ -165,7 +173,7 @@ namespace Discord.json
 					{
 						var arg = match.Groups[1].Value;
 
-						if (Int32.TryParse(arg, out int index))
+						if (int.TryParse(arg, out int index))
 						{
 							var posArg = userArgs[index];
 							returnArg = (returnArg as string).Replace(match.Value, posArg.ToString());
@@ -199,7 +207,7 @@ namespace Discord.json
 			var mUlong = match.Groups[1].Value;
 			var mMatch = match.Value;
 
-			UInt64.TryParse(mUlong, out ulong id);
+			ulong.TryParse(mUlong, out ulong id);
 			if (mMatch.StartsWith("<@"))
 			{
 				returnArg = (Context.Guild as SocketGuild).GetUser(id);
