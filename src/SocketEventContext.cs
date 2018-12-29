@@ -31,6 +31,14 @@ namespace Discord.json
 			User = user;
 		}
 
+		public SocketEventContext(DiscordSocketClient client, SocketUser user, SocketGuild guild)
+		{
+			Client = client;
+			Guild = guild;
+			Channel = guild.DefaultChannel;
+			User = user;
+		}
+
 		//ICommandContext
 		IDiscordClient ICommandContext.Client => Client;
 		IGuild ICommandContext.Guild => Guild;

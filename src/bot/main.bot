@@ -1,5 +1,5 @@
 {
-  "token": "",
+  "token": "[bot token]",
   "prefix": "!",
   "playing": "Existing",
   "activity": 1,
@@ -44,6 +44,15 @@
         {
           "action": "AddRole",
           "args": [ "|user|", "red" ]
+        }
+      ]
+    },
+    {
+      "event": "UserBanned",
+      "actions": [
+        {
+          "action": "Reply",
+          "args": [ "Banned |user-name| from |guild|" ]
         }
       ]
     }

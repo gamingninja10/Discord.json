@@ -21,6 +21,7 @@ namespace Discord.json
 				Activity = (ActivityType)botData.Activity,
 				StreamUrl = botData.StreamUrl	
 			};
+			Events.Bot = bot;
 			bot.Start();
         }
     }

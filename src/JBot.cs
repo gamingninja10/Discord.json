@@ -55,7 +55,7 @@ namespace Discord.json
 		public string StreamUrl { get; set; } = null;
 
 		private readonly string _token;
-		private readonly JsonBotData _data;
+		public readonly JsonBotData _data;
 		private readonly string _binds;
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace Discord.json
 
 			Client.Log += Log;
 
-			if (!String.IsNullOrEmpty(Playing))
+			if (!string.IsNullOrEmpty(Playing))
 				await Client.SetGameAsync(Playing, StreamUrl, Activity);
 
 			Client.MessageReceived += HandleCommandAsync;
@@ -144,30 +144,42 @@ namespace Discord.json
 		private void RegisterEvents()
 		{
 			if (_data.Events.Find(e => e.Name == "UserJoined") != null)
-				Client.UserJoined += ExecuteEvent;
-		}
-
-		public async Task ExecuteEvent(object args)
-		{
-			var eventObjects = new Dictionary<Type, string>
 			{
-				{ typeof(SocketGuildUser), "UserJoined" }
-			};
-			await ExecuteActionsAsync(eventObjects[args.GetType()], args);
+				Client.UserJoined += Events.UserJoined;
+			}
+			if (_data.Events.Find(e => e.Name == "UserBanned") != null)
+			{
+				Client.UserBanned += Events.UserBanned;
+			}
+			if (_data.Events.Find(e => e.Name == "UserLeft") != null)
+			{
+				Client.UserLeft += Events.UserLeft;
+			}
 		}
 
-		private async Task ExecuteActionsAsync(string eventName, object args)
+		public async Task ExecuteActionsAsync(string eventName, params object[] args)
 		{
 			var eventData = _data.Events.Find(e => e.Name == eventName);
 			switch (eventName)
 			{
 				case "UserJoined":
-					
+				case "UserLeft":
 					foreach (var action in eventData.Actions)
 					{
-						var user = (args as SocketGuildUser);
+						var user = (args[0] as SocketGuildUser);
 						Actions.Context = new SocketEventContext(Client, user);
-						var argList = _actions.ArgParser(action.Arguments, new List<object>());//new List<object>(action.Arguments);
+						var argList = _actions.ArgParser(action.Arguments, new List<object>());
+						await _actions.ExecuteActionAsync(action, argList);
+					}
+					break;
+
+				case "UserBanned":
+					foreach (var action in eventData.Actions)
+					{
+						var user = (args[0] as SocketUser);
+						var guild = (args[1] as SocketGuild);
+						Actions.Context = new SocketEventContext(Client, user, guild);
+						var argList = _actions.ArgParser(action.Arguments, new List<object>());
 						await _actions.ExecuteActionAsync(action, argList);
 					}
 					break;
