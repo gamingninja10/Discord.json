@@ -199,7 +199,7 @@ namespace Discord.json
 			if (!(arg is SocketUserMessage message) || message.Author.IsBot) return;
 
 			int argPos = 0;
-			if (message.HasStringPrefix(Prefix, ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos) && AllowMentionPrefix)
+			if (message.HasStringPrefix(Prefix, ref argPos) || (message.HasMentionPrefix(Client.CurrentUser, ref argPos) && AllowMentionPrefix))
 			{
 				var context = new SocketCommandContext(Client, message);
 				var commandArgs = ParseMessage(message.Content);
